@@ -2,7 +2,9 @@ Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   namespace :api do
     namespace :v1 do
-      resources :users, param: :uuid, only: [ :index, :create, :show, :destroy ]
+      resources :users, param: :uuid, only: [ :index, :create, :show, :destroy ] do
+        resources :orgs, only: [ :index ], module: :users
+      end
       resources :organizations, param: :uuid, only: [ :index, :create, :show, :destroy ] do
         resources :memberships, only: [ :create ], module: :organizations
         delete 'memberships', to: 'organizations/memberships#destroy', as: :leave_membership
