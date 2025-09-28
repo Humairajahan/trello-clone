@@ -8,6 +8,7 @@ Rails.application.routes.draw do
       resources :organizations, param: :uuid, only: [ :index, :create, :show, :destroy ] do
         resources :memberships, only: [ :create ], module: :organizations
         delete 'memberships', to: 'organizations/memberships#destroy', as: :leave_membership
+        resources :members, only: [ :index ], module: :organizations
       end
     end
   end
