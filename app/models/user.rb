@@ -1,6 +1,9 @@
 class User < ApplicationRecord
   enum :role, [ :admin, :team_lead, :project_manager, :member ]
 
+  has_many :memberships
+  has_many :organizations, through: :memberships
+
   has_secure_password
 
   validates :name, presence: true
