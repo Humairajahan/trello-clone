@@ -4,6 +4,9 @@ class User < ApplicationRecord
   has_many :memberships
   has_many :organizations, through: :memberships
 
+  has_many :project_memberships
+  has_many :projects, through: :project_memberships
+
   has_secure_password
 
   validates :name, presence: true

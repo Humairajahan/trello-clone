@@ -11,7 +11,10 @@ Rails.application.routes.draw do
         resources :members, only: [ :index ], module: :organizations
         resources :projects, only: [ :index ], module: :organizations
       end
-      resources :projects, param: :uuid, only: [ :index, :create, :show, :destroy ]
+      resources :projects, param: :uuid, only: [ :index, :create, :show, :destroy ] do
+        resources :memberships, only: [ :create ], module: :projects
+        delete 'memberships/:user_uuid', to: 'projects/memberships#destroy', as: :leave_project_membership
+      end
     end
   end
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
