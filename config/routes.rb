@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :users, param: :uuid, only: [ :index, :create, :show, :destroy ] do
         resources :orgs, only: [ :index ], module: :users
+        resources :projects, only: [ :index ], module: :users
       end
       resources :organizations, param: :uuid, only: [ :index, :create, :show, :destroy ] do
         resources :memberships, only: [ :create ], module: :organizations
