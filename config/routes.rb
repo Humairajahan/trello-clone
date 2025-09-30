@@ -17,6 +17,7 @@ Rails.application.routes.draw do
         delete 'memberships/:user_uuid', to: 'projects/memberships#destroy', as: :leave_project_membership
         resources :members, only: [ :index ], module: :projects
       end
+      resources :boards, param: :uuid, only: [ :index, :create, :show, :destroy ]
     end
   end
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
