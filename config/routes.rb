@@ -16,6 +16,7 @@ Rails.application.routes.draw do
         resources :memberships, only: [ :create ], module: :projects
         delete 'memberships/:user_uuid', to: 'projects/memberships#destroy', as: :leave_project_membership
         resources :members, only: [ :index ], module: :projects
+        resources :boards, only: [ :index ], module: :projects
       end
       resources :boards, param: :uuid, only: [ :index, :create, :show, :destroy ]
     end
