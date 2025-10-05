@@ -2,7 +2,11 @@ Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   namespace :api do
     namespace :v1 do
-      resources :users, param: :uuid, only: [ :index, :create, :show, :destroy ] do
+      resource :auth do
+        post :signup, to: 'auth#signup', as: :signup
+        post :signin, to: 'auth#signin', as: :signin
+      end
+      resources :users, param: :uuid, only: [ :index, :show, :destroy ] do
         resources :orgs, only: [ :index ], module: :users
         resources :projects, only: [ :index ], module: :users
       end
